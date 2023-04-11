@@ -1,0 +1,25 @@
+@import './tailwind.css';
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Vazirmatn:wght@300;400&display=swap');
+
+:root {
+	line-height: 1.5;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+html,
+body {
+	font-family: 'Lato', sans-serif;
+}
+html[dir='rtl'],
+html[dir='rtl'] body {
+	font-family: 'Vazirmatn', sans-serif;
+}
+
+*,
+*:focus {
+	outline: none;
+	text-align: inherit;
+}
