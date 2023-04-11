@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "prettier": "npx prettier --write .",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
+    "prettier": "^2.8.7",
     "vite": "^4.2.0"
   }
 }
