@@ -1,4 +1,4 @@
-import { useReducer, useCallback, ref, useMemo } from 'react';
+import { useReducer, useCallback, useRef, useMemo } from 'react';
 import { FormiumProvider } from '@/providers/FormiumContext';
 
 const initialValues = {
@@ -20,6 +20,7 @@ const actionTypes = {
 };
 
 function formiumReducer(state, action) {
+	console.log(action);
 	switch (action.type) {
 		case 'SET_VALUES':
 			return { ...state, values: action.payload };
@@ -56,13 +57,12 @@ function Formium({
 	values,
 	formatters,
 	validators,
-	onSubmit,
+	action,
 	onSuccess,
 	onReject,
 	children,
 }) {
-	const initialFormValue = ref(values);
-
+	const initialFormValue = useRef(values);
 	const [state, dispatch] = useReducer(formiumReducer, {
 		...initialValues,
 		values,
@@ -76,9 +76,12 @@ function Formium({
 			if (validatorFn) {
 				const validatorResult = validatorFn(value);
 				if (validatorResult !== true) {
-					dispatch(actionTypes.SET_FIELD_ERROR, {
-						field,
-						value: validatorResult || 'InValid Value!!',
+					dispatch({
+						type: actionTypes.SET_FIELD_ERROR,
+						payload: {
+							field,
+							value: validatorResult || 'InValid Value!!',
+						},
 					});
 					return false;
 				}
@@ -96,58 +99,61 @@ function Formium({
 	);
 
 	const resetForm = useCallback((nextState) => {
-		const values = nextState.values ? nextState.values : initialFormValue;
-		dispatch(actionTypes.RESET_FORM, { values });
+		const values = nextState.values ? nextState.values : initialFormValue.current;
+		dispatch({ type: actionTypes.RESET_FORM, payload: values });
 	}, []);
 
-	const handleSubmit = useCallback((e) => {
-		e.stopPropagation();
-		e.preventDefault();
+	const handleSubmit = useCallback(
+		(e) => {
+			e.stopPropagation();
+			e.preventDefault();
 
-		if (typeof onSubmit !== 'function') {
-			return;
-		}
+			const hasError = runAllValidators();
 
-		const hasError = runAllValidators();
-
-		if (hasError) {
-			const err = new Error('inValid Value has been inserted!!');
-			err.status = 400;
-			onReject(err);
-		} else {
-			onSubmit(state.values)
-				.then((d) => onSuccess(d))
-				.catch((e) => {
-					if (e?.status === 400) {
-						Object.entries(e?.body?.field_errors || {}).forEach(([field, value]) => {
-							dispatch(actionTypes.SET_FIELD_ERROR, { field, value });
-						});
-					}
-					onReject(e);
-				});
-		}
-	}, []);
+			if (hasError) {
+				const err = new Error('inValid Value has been inserted!!');
+				err.status = 400;
+				onReject(err);
+			} else {
+				action(state.values)
+					.then((d) => onSuccess(d))
+					.catch((e) => {
+						if (e?.status === 400) {
+							Object.entries(e?.body?.field_errors || {}).forEach(([field, value]) => {
+								dispatch({
+									type: actionTypes.SET_FIELD_ERROR,
+									payload: { field, value },
+								});
+							});
+						}
+						onReject(e);
+					});
+			}
+		},
+		[action, onSuccess, onReject, state.values, dispatch],
+	);
 
 	const providerValues = useMemo(
 		() => ({
 			values: state.values,
 			setValue: (field, value) =>
-				dispatch(actionTypes.SET_FIELD_VALUEL, { field, value }),
+				dispatch({ type: actionTypes.SET_FIELD_VALUEL, payload: { field, value } }),
 			errors: state.errors,
-			setError: (field, value) => dispatch(actionTypes.SET_FIELD_ERROR, { field, value }),
+			setError: (field, value) =>
+				dispatch({ type: actionTypes.SET_FIELD_ERROR, payload: { field, value } }),
 			formatters: state.formatters,
 			setFormatter: (field, value) =>
-				dispatch(actionTypes.SET_FIELD_FORMATTER, { field, value }),
+				dispatch({ type: actionTypes.SET_FIELD_FORMATTER, payload: { field, value } }),
 			validators: state.validators,
 			setValidator: (field, value) =>
-				dispatch(actionTypes.SET_FIELD_VALIDATOR, { field, value }),
+				dispatch({ type: actionTypes.SET_FIELD_VALIDATOR, payload: { field, value } }),
 			resetForm,
 		}),
 		[state.values, state.errors, state.formatters, state.validators, resetForm],
 	);
 
 	return (
-		<FormiumProvider values={providerValues}>
+		<FormiumProvider value={providerValues}>
 			<form onSubmit={handleSubmit}>{children}</form>
 		</FormiumProvider>
 	);
@@ -157,7 +163,7 @@ Formium.defaultProps = {
 	values: {},
 	formatters: {},
 	validators: {},
-	onSubmit: () => {},
+	action: () => {},
 	onSuccess: () => {},
 	onReject: () => {},
 	children: null,

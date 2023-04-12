@@ -15,6 +15,7 @@ module.exports = {
 		'react/prop-types': 'off',
 		'react/react-in-jsx-scope': 'off',
 		// js
+		'default-param-last': 'off',
 		'no-shadow': 'off',
 		'no-useless-return': 'off',
 		indent: ['error', 'tab', { SwitchCase: 1 }],
