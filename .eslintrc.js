@@ -12,13 +12,18 @@ module.exports = {
 	},
 	rules: {
 		// react
+		'react/prop-types': 'off',
 		'react/react-in-jsx-scope': 'off',
 		// js
-		indent: ['error', 'tab'],
+		'no-shadow': 'off',
+		'no-useless-return': 'off',
+		indent: ['error', 'tab', { SwitchCase: 1 }],
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
 		// import
+		'import/extensions': 'off',
+		'import/no-unresolved': 'off',
 		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 		'import/order': [
 			'error',
@@ -26,12 +31,12 @@ module.exports = {
 				groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
 				pathGroups: [
 					{
-						pattern: 'react*',
-						group: 'external',
+						pattern: 'react',
+						group: 'builtin',
 						position: 'before',
 					},
 					{
-						pattern: 'src/**/*',
+						pattern: '@/**/*',
 						group: 'parent',
 						position: 'before',
 					},
@@ -44,7 +49,7 @@ module.exports = {
 	settings: {
 		'import/resolver': {
 			alias: {
-				map: [['@', './src']],
+				map: [['@/*', 'src/*']],
 				extensions: ['.js', '.ts', '.tsx', '.jsx', '.json'],
 			},
 		},
