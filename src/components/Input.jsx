@@ -24,7 +24,12 @@ const Input = ({ label, placeholder, multiline, type, className, ...fieldProps }
 	}, []);
 
 	return (
-		<Label htmlFor={id} {...props}>
+		<Label
+			label={label}
+			htmlFor={id}
+			className={mergeClassNames(className, 'w-full')}
+			{...props}
+		>
 			<Tag
 				id={id}
 				type={type}

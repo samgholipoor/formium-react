@@ -1,10 +1,13 @@
-const Label = ({ label, htmlFor, children }) => (
-	<div className="flex flex-column items-center gap-1">
-		<label htmlFor={htmlFor}>
-			<span>{label}</span>
-			{children}
-		</label>
-	</div>
+import { mergeClassNames } from '@/utils';
+
+const Label = ({ label, htmlFor, className, children }) => (
+	<label
+		htmlFor={htmlFor}
+		className={mergeClassNames(className, 'flex flex-col items-start gap-1')}
+	>
+		<span>{label}</span>
+		{children}
+	</label>
 );
 
 export default Label;

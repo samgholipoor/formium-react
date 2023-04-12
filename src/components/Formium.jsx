@@ -1,4 +1,4 @@
-import { useReducer, useCallback, useRef, useMemo } from 'react';
+import { useReducer, useCallback, useMemo, useEffect } from 'react';
 import { FormiumProvider } from '@/providers/FormiumContext';
 
 const initialValues = {
@@ -12,6 +12,7 @@ const initialValues = {
 const actionTypes = {
 	SET_VALUES: 'SET_VALUES',
 	SET_FIELD_VALUEL: 'SET_FIELD_VALUE',
+	SET_ERRORS: 'SET_ERRORS',
 	SET_FIELD_ERROR: 'SET_FIELD_ERROR',
 	SET_FIELD_FORMATTER: 'SET_FIELD_FORMATTER',
 	SET_FIELD_VALIDATOR: 'SET_FIELD_VALIDATOR',
@@ -20,7 +21,6 @@ const actionTypes = {
 };
 
 function formiumReducer(state, action) {
-	console.log(action);
 	switch (action.type) {
 		case 'SET_VALUES':
 			return { ...state, values: action.payload };
@@ -28,6 +28,11 @@ function formiumReducer(state, action) {
 			return {
 				...state,
 				values: { ...state.values, [action.payload.field]: action.payload.value },
+			};
+		case 'SET_ERRORS':
+			return {
+				...state,
+				errors: { ...action.payload },
 			};
 		case 'SET_FIELD_ERROR':
 			return {
@@ -60,9 +65,9 @@ function Formium({
 	action,
 	onSuccess,
 	onReject,
+	className,
 	children,
 }) {
-	const initialFormValue = useRef(values);
 	const [state, dispatch] = useReducer(formiumReducer, {
 		...initialValues,
 		values,
@@ -70,9 +75,16 @@ function Formium({
 		validators,
 	});
 
-	const validatorHandler =
-		((field, value) => {
-			const validatorFn = state.validators[field];
+	useEffect(() => {
+		dispatch({
+			type: actionTypes.SET_ERRORS,
+			payload: {},
+		});
+	}, [state?.values]);
+
+	const validatorHandler = useCallback(
+		(field, validatorFn) => {
+			const value = state.values[field];
 			if (validatorFn) {
 				const validatorResult = validatorFn(value);
 				if (validatorResult !== true) {
@@ -88,29 +100,25 @@ function Formium({
 			}
 			return true;
 		},
-		[state.validators]);
+		[state?.validators, state?.values],
+	);
 
 	const runAllValidators = useCallback(
 		() =>
-			Object.entries(state.validators).some((field, value) =>
-				validatorHandler(field, value),
-			),
-		[],
+			Object.entries(state.validators)
+				.map(([field, value]) => validatorHandler(field, value))
+				.every(Boolean),
+		[state.validators, state?.values, state?.errors],
 	);
-
-	const resetForm = useCallback((nextState) => {
-		const values = nextState.values ? nextState.values : initialFormValue.current;
-		dispatch({ type: actionTypes.RESET_FORM, payload: values });
-	}, []);
 
 	const handleSubmit = useCallback(
 		(e) => {
 			e.stopPropagation();
 			e.preventDefault();
 
-			const hasError = runAllValidators();
+			const isValidForm = runAllValidators();
 
-			if (hasError) {
+			if (!isValidForm) {
 				const err = new Error('inValid Value has been inserted!!');
 				err.status = 400;
 				onReject(err);
@@ -130,7 +138,7 @@ function Formium({
 					});
 			}
 		},
-		[action, onSuccess, onReject, state.values, dispatch],
+		[action, onSuccess, onReject, state.values, state.validators, dispatch],
 	);
 
 	const providerValues = useMemo(
@@ -147,14 +155,15 @@ function Formium({
 			validators: state.validators,
 			setValidator: (field, value) =>
 				dispatch({ type: actionTypes.SET_FIELD_VALIDATOR, payload: { field, value } }),
-			resetForm,
 		}),
-		[state.values, state.errors, state.formatters, state.validators, resetForm],
+		[state.values, state.errors, state.formatters, state.validators],
 	);
 
 	return (
 		<FormiumProvider value={providerValues}>
-			<form onSubmit={handleSubmit}>{children}</form>
+			<form className={className} onSubmit={handleSubmit}>
+				{children}
+			</form>
 		</FormiumProvider>
 	);
 }
