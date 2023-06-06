@@ -1,5 +1,5 @@
 import Formium from '@/components/Formium';
-import Input from '@/components/Input';
+import Check from '@/components/Check';
 
 function App() {
 	const handleSubmit = (e) => {
@@ -8,20 +8,36 @@ function App() {
 	};
 
 	const handleSuccess = (s) => {
-		console.log(s);
+		console.log('handleSuccess', s);
 	};
 
 	const handleError = (x) => {
-		console.log(x);
+		console.log('handleError', x);
 	};
 
 	return (
 		<div className="App">
-			<h2 className="text-sm text-lime-600">Boiler Plate</h2>
 			<div>
-				<Formium action={handleSubmit} onSuccess={handleSuccess} onReject={handleError}>
-					<Input label="test" name="name" />
-					<Input name="family" validator={(e) => !!e || 'this is error'} />
+				<Formium
+					values={{ name: [] }}
+					action={handleSubmit}
+					onSuccess={handleSuccess}
+					onReject={handleError}
+				>
+					<Check
+						label="mrital status"
+						name="name"
+						multiple={true}
+						options={[
+							{ title: 'name', value: 'name' },
+							{ title: 'family', value: 'family' },
+							{ title: 'age', value: 'age' },
+						]}
+						// validator={[
+						// 	(e) => !!e || 'is required',
+						// 	(e) => e.length > 3 || 'must be more than three',
+						// ]}
+					/>
 					<button type="submit">click me</button>
 				</Formium>
 			</div>

@@ -1,9 +1,7 @@
 import { createContext, useContext } from 'react';
 
 const FormiumContext = createContext();
-
 const FormiumProvider = FormiumContext.Provider;
-const FormiumConsumer = FormiumContext.Consumer;
 
 function useFormium() {
 	const formium = useContext(FormiumContext);
@@ -15,4 +13,4 @@ function useFormium() {
 	return formium;
 }
 
-export { FormiumProvider, FormiumConsumer, useFormium };
+export { FormiumProvider, useFormium };

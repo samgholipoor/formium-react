@@ -30,10 +30,7 @@ function formiumReducer(state, action) {
 				values: { ...state.values, [action.payload.field]: action.payload.value },
 			};
 		case 'SET_ERRORS':
-			return {
-				...state,
-				errors: { ...action.payload },
-			};
+			return { ...state, errors: { ...action.payload } };
 		case 'SET_FIELD_ERROR':
 			return {
 				...state,
@@ -83,19 +80,23 @@ function Formium({
 	}, [state?.values]);
 
 	const validatorHandler = useCallback(
-		(field, validatorFn) => {
+		(field, validatorFns) => {
 			const value = state.values[field];
-			if (validatorFn) {
-				const validatorResult = validatorFn(value);
-				if (validatorResult !== true) {
-					dispatch({
-						type: actionTypes.SET_FIELD_ERROR,
-						payload: {
-							field,
-							value: validatorResult || 'InValid Value!!',
-						},
-					});
-					return false;
+			if (validatorFns && validatorFns.length > 0) {
+				for (let i = 0; i < validatorFns.length; i += 1) {
+					const validatorFn = validatorFns[i];
+					if (typeof validatorFn !== 'function') continue;
+					const validatorResult = validatorFn(value);
+					if (validatorResult !== true) {
+						dispatch({
+							type: actionTypes.SET_FIELD_ERROR,
+							payload: {
+								field,
+								value: validatorResult || 'InValid Value!!',
+							},
+						});
+						return false;
+					}
 				}
 			}
 			return true;
@@ -103,10 +104,10 @@ function Formium({
 		[state?.validators, state?.values],
 	);
 
-	const runAllValidators = useCallback(
+	const runAllValidatorsAndCheck = useCallback(
 		() =>
 			Object.entries(state.validators)
-				.map(([field, value]) => validatorHandler(field, value))
+				.map(([field, fns]) => validatorHandler(field, fns))
 				.every(Boolean),
 		[state.validators, state?.values, state?.errors],
 	);
@@ -116,7 +117,7 @@ function Formium({
 			e.stopPropagation();
 			e.preventDefault();
 
-			const isValidForm = runAllValidators();
+			const isValidForm = runAllValidatorsAndCheck();
 
 			if (!isValidForm) {
 				const err = new Error('inValid Value has been inserted!!');
@@ -124,7 +125,7 @@ function Formium({
 				onReject(err);
 			} else {
 				action(state.values)
-					.then((d) => onSuccess(d))
+					.then(onSuccess)
 					.catch((e) => {
 						if (e?.status === 400) {
 							Object.entries(e?.body?.field_errors || {}).forEach(([field, value]) => {
