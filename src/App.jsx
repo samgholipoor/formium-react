@@ -1,5 +1,6 @@
 import Formium from '@/components/Formium';
 import Check from '@/components/Check';
+import Toggle from '@/components/Toggle';
 
 function App() {
 	const handleSubmit = (e) => {
@@ -38,6 +39,7 @@ function App() {
 						// 	(e) => e.length > 3 || 'must be more than three',
 						// ]}
 					/>
+					<Toggle label="test" name="toggle" />
 					<button type="submit">click me</button>
 				</Formium>
 			</div>

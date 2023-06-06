@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import useFormiumField from '@/hooks/useFormiumField';
-import { Label } from '@/components/Formium';
+import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
 
 const Check = ({ className, label, options, multiple, children, ...fieldProps }) => {
@@ -61,6 +61,7 @@ const Check = ({ className, label, options, multiple, children, ...fieldProps })
 					</label>
 				))}
 			</div>
+			<ErrorMessage error={error} />
 		</div>
 	);
 };
