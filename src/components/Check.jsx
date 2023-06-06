@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import useFormiumField from '@/hooks/useFormiumField';
-import Label from '@/components/Label';
+import { Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
 
 const Check = ({ className, label, options, multiple, children, ...fieldProps }) => {
