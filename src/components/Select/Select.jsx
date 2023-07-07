@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import SelectOptions from 'react-select';
 import { mergeClassNames } from '@/utils/classname';
 import { ErrorMessage, Label } from '@/components/Formium';
@@ -61,6 +62,29 @@ export default function Select({
 		</div>
 	);
 }
+
+Select.propTypes = {
+	/**
+	 * Identifier of select options
+	 */
+	name: PropTypes.string,
+	/**
+	 * Select label
+	 */
+	label: PropTypes.string,
+	/**
+	 * Select placeholder
+	 */
+	placeholder: PropTypes.string,
+	/**
+	 * Options of check, Array of objects
+	 */
+	options: PropTypes.arrayOf(PropTypes.shape({ label: 'example', value: 'example' })),
+	/**
+	 * define the select state of being multiple or single selection
+	 */
+	multiple: PropTypes.bool,
+};
 
 Select.defaultProps = {
 	label: '',

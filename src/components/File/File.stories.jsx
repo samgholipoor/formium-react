@@ -28,7 +28,7 @@ export const SingleFileUpload = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Single check-box which you can choose one element from others',
+				story: 'File input which you can upload just one file',
 			},
 		},
 	},
@@ -41,7 +41,7 @@ export const MultipleFilesUpload = {
 	parameters: {
 		docs: {
 			description: {
-				story: 'Multiple check-box which you can choose more than one element',
+				story: 'File input with multi state you can upload more than one file',
 			},
 		},
 	},

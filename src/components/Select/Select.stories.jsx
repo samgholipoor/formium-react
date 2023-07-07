@@ -1,19 +1,19 @@
-import Check from '@/components/Check';
+import Select from '@/components/Select';
 import Formium from '@/components/Formium';
 
 export default {
-	title: 'Design System/Atoms/Check',
-	component: Check,
+	title: 'Design System/Atoms/Select',
+	component: Select,
 	decorators: [
 		(Story) => (
-			<Formium values={{ car: '' }}>
+			<Formium values={{ select: '' }}>
 				<Story />
 			</Formium>
 		),
 	],
 	tags: ['autodocs'],
 	args: {
-		name: 'car',
+		name: 'select',
 		label: 'Cars',
 		options: [
 			{ label: 'BMW', value: 1 },
@@ -23,27 +23,27 @@ export default {
 	},
 };
 
-export const SingleCheck = {
+export const SingleSelect = {
 	args: {
 		multiple: false,
 	},
 	parameters: {
 		docs: {
 			description: {
-				story: 'Single check-box which you can choose one element from others',
+				story: 'Single select which you can choose one element from options',
 			},
 		},
 	},
 };
 
-export const MultipleCheck = {
+export const MultipleSelect = {
 	args: {
 		multiple: true,
 	},
 	parameters: {
 		docs: {
 			description: {
-				story: 'Multiple check-box which you can choose more than one element',
+				story: 'Multiple select which you can choose more than one element from options',
 			},
 		},
 	},
