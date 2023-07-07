@@ -39,12 +39,7 @@ module.exports = {
 		// import
 		'import/extensions': 'off',
 		'import/no-unresolved': 'off',
-		'import/no-extraneous-dependencies': [
-			'error',
-			{
-				devDependencies: true,
-			},
-		],
+		'import/no-extraneous-dependencies': 'off',
 		'import/order': [
 			'error',
 			{

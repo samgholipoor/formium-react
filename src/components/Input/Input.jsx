@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useFormiumField } from '@/hooks/useFormiumField';
 import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
@@ -44,6 +45,29 @@ const Input = ({ label, placeholder, multiline, type, className, ...fieldProps }
 			<ErrorMessage error={error} />
 		</Label>
 	);
+};
+
+Input.propTypes = {
+	/**
+	 * Identifier of input
+	 */
+	name: PropTypes.string,
+	/**
+	 * Label of input
+	 */
+	label: PropTypes.string,
+	/**
+	 * Placeholder of input
+	 */
+	placeholder: PropTypes.string,
+	/**
+	 * define the input state of being text input or text area
+	 */
+	multiline: PropTypes.bool,
+	/**
+	 * type of text input
+	 */
+	type: PropTypes.oneOf(['text', 'email', 'password']),
 };
 
 Input.defaultProps = {

@@ -1,4 +1,5 @@
 import { useCallback, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import useFormiumField from '@/hooks/useFormiumField';
 import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
@@ -48,10 +49,10 @@ const Check = ({ className, label, options, multiple, ...fieldProps }) => {
 	return (
 		<div className={mergeClassNames(className, 'form-control w-full')} {...props}>
 			<Label label={label} />
-			<div className="flex items-center content-center gap-1 flex-wrap">
+			<div className="flex items-center content-center gap-4 flex-wrap">
 				{optionsObject.map((option) => (
 					<label
-						className="label cursor-pointer inline-flex items-center gap-2"
+						className="label cursor-pointer inline-flex items-center gap-2 px-0"
 						key={option.value}
 					>
 						<input
@@ -67,6 +68,25 @@ const Check = ({ className, label, options, multiple, ...fieldProps }) => {
 			<ErrorMessage error={error} />
 		</div>
 	);
+};
+
+Check.propTypes = {
+	/**
+	 * Identifier of input
+	 */
+	name: PropTypes.string,
+	/**
+	 * Checkbox label
+	 */
+	label: PropTypes.string,
+	/**
+	 * Options of check, Array of objects
+	 */
+	options: PropTypes.arrayOf(PropTypes.shape({ label: 'example', value: 'example' })),
+	/**
+	 * define the check state of being multiple or single selection
+	 */
+	multiple: PropTypes.bool,
 };
 
 Check.defaultProps = {
