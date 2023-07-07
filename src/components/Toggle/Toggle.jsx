@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import useFormiumField from '@/hooks/useFormiumField';
 import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
@@ -20,6 +21,17 @@ const Toggle = ({ label, className, ...fieldProps }) => {
 			</div>
 		</div>
 	);
+};
+
+Toggle.propTypes = {
+	/**
+	 * Toggle identifier
+	 */
+	name: PropTypes.string,
+	/**
+	 * Toggle label
+	 */
+	label: PropTypes.string,
 };
 
 Toggle.defaultProps = {

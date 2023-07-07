@@ -65,7 +65,7 @@ export default function Select({
 
 Select.propTypes = {
 	/**
-	 * Identifier of select options
+	 * Select identifier
 	 */
 	name: PropTypes.string,
 	/**
@@ -81,7 +81,7 @@ Select.propTypes = {
 	 */
 	options: PropTypes.arrayOf(PropTypes.shape({ label: 'example', value: 'example' })),
 	/**
-	 * define the select state of being multiple or single selection
+	 * Define the select state of being multiple or single selection
 	 */
 	multiple: PropTypes.bool,
 };

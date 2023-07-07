@@ -49,23 +49,23 @@ const Input = ({ label, placeholder, multiline, type, className, ...fieldProps }
 
 Input.propTypes = {
 	/**
-	 * Identifier of input
+	 * Input identifier
 	 */
 	name: PropTypes.string,
 	/**
-	 * Label of input
+	 * Input label
 	 */
 	label: PropTypes.string,
 	/**
-	 * Placeholder of input
+	 * Input placeholder
 	 */
 	placeholder: PropTypes.string,
 	/**
-	 * define the input state of being text input or text area
+	 * Define the input state of being text input or text area
 	 */
 	multiline: PropTypes.bool,
 	/**
-	 * type of text input
+	 * Input type
 	 */
 	type: PropTypes.oneOf(['text', 'email', 'password']),
 };

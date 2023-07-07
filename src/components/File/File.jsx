@@ -109,7 +109,7 @@ export default function File({
 
 File.propTypes = {
 	/**
-	 * Identifier of file input
+	 * File identifier
 	 */
 	name: PropTypes.string,
 	/**
@@ -121,7 +121,7 @@ File.propTypes = {
 	 */
 	placeholder: PropTypes.string,
 	/**
-	 * define the file input state of acepting multiple or single file
+	 * Define the file input state of acepting multiple or single file
 	 */
 	multiple: PropTypes.bool,
 };

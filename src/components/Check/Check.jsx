@@ -72,7 +72,7 @@ const Check = ({ className, label, options, multiple, ...fieldProps }) => {
 
 Check.propTypes = {
 	/**
-	 * Identifier of input
+	 * Checkbox identifier
 	 */
 	name: PropTypes.string,
 	/**
@@ -80,11 +80,11 @@ Check.propTypes = {
 	 */
 	label: PropTypes.string,
 	/**
-	 * Options of check, Array of objects
+	 * Options of checkbox which is an array of objects
 	 */
 	options: PropTypes.arrayOf(PropTypes.shape({ label: 'example', value: 'example' })),
 	/**
-	 * define the check state of being multiple or single selection
+	 * Define the check state of being multiple or single selection
 	 */
 	multiple: PropTypes.bool,
 };
