@@ -2,6 +2,7 @@ import Formium from '@/components/Formium';
 import Check from '@/components/Check';
 import Toggle from '@/components/Toggle';
 import Select from './components/Select';
+import File from './components/File';
 
 function App() {
 	const handleSubmit = (e) => {
@@ -47,6 +48,7 @@ function App() {
 							{ label: 'BMW', value: 3 },
 						]}
 					/>
+					<File name="file" />
 					<Toggle label="test" name="toggle" />
 					<button type="submit">click me</button>
 				</Formium>
