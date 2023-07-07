@@ -1,13 +1,8 @@
-Address link to see on the fly:
-Formium_Address_link: 
-
 # formium react
 you can find out the live demo of formium in the following link:
-
 [Formium address link](https://formium-react.vercel.app/)
 
 and you can aslo find out the formium storybook in the link below:
-
 [Formium Storybook address link](https://formium-storybook.vercel.app/)
 
 
@@ -30,6 +25,10 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
+
+### `yarn storybook`
+In order to see the storybook in local mode
+you shoud run this command and open [http://localhost:6006](http://localhost:6006/) to see on browser.
 
 ### `prefered node and npm version`
 
