@@ -142,7 +142,7 @@ function DatePicker({
 					className="absolute"
 				>
 					<Calendar
-						locale="fa"
+						locale={locale}
 						value={calendarValue}
 						onChange={handleChange}
 						shouldHighlightWeekends
