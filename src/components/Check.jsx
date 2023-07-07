@@ -4,17 +4,20 @@ import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
 
 const Check = ({ className, label, options, multiple, children, ...fieldProps }) => {
-	const { id, value, onChange, error, ...props } = useFormiumField(fieldProps);
+	const { id, value, onChange, error, ...props } = useFormiumField(
+		fieldProps,
+		multiple ? [] : undefined,
+	);
 
 	const type = useMemo(() => (multiple ? 'checkbox' : 'radio'), [multiple]);
 
 	const optionsObject = useMemo(
 		() =>
 			options.map((option) => {
-				const { title, value: optionValue } = option;
+				const { label, value: optionValue } = option;
 				const isChecked = multiple ? value.includes(optionValue) : optionValue === value;
 				return {
-					title,
+					label,
 					value: optionValue,
 					isChecked,
 				};
@@ -57,7 +60,7 @@ const Check = ({ className, label, options, multiple, children, ...fieldProps })
 							onChange={() => handleChange(option.value)}
 							className={type}
 						/>
-						<span className="label-text text-base"> {option.title} </span>
+						<span className="label-text text-base"> {option.label} </span>
 					</label>
 				))}
 			</div>

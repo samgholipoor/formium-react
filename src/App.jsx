@@ -1,6 +1,7 @@
 import Formium from '@/components/Formium';
 import Check from '@/components/Check';
 import Toggle from '@/components/Toggle';
+import Select from './components/Select';
 
 function App() {
 	const handleSubmit = (e) => {
@@ -28,16 +29,23 @@ function App() {
 					<Check
 						label="mrital status"
 						name="name"
-						multiple={true}
 						options={[
-							{ title: 'name', value: 'name' },
-							{ title: 'family', value: 'family' },
-							{ title: 'age', value: 'age' },
+							{ label: 'name', value: 'name' },
+							{ label: 'family', value: 'family' },
+							{ label: 'age', value: 'age' },
 						]}
 						// validator={[
 						// 	(e) => !!e || 'is required',
 						// 	(e) => e.length > 3 || 'must be more than three',
 						// ]}
+					/>
+					<Select
+						name="car"
+						options={[
+							{ label: 'Benz', value: 1 },
+							{ label: 'Toyota', value: 2 },
+							{ label: 'BMW', value: 3 },
+						]}
 					/>
 					<Toggle label="test" name="toggle" />
 					<button type="submit">click me</button>
