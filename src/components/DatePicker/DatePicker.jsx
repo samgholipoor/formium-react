@@ -1,4 +1,5 @@
 import { useEffect, useRef, useMemo, useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import IDate from 'idate';
 import { Calendar } from '@hassanmojab/react-modern-calendar-datepicker';
 import { mergeClassNames } from '@/utils/classname';
@@ -152,6 +153,29 @@ function DatePicker({
 		</div>
 	);
 }
+
+DatePicker.propTypes = {
+	/**
+	 * DatePicker identifier
+	 */
+	name: PropTypes.string,
+	/**
+	 * DatePicker label
+	 */
+	label: PropTypes.string,
+	/**
+	 * DatePicker placeholder
+	 */
+	placeholder: PropTypes.string,
+	/**
+	 * DatePicker range which determine to select one date or range of dates
+	 */
+	isRange: PropTypes.bool,
+	/**
+	 * DatePicker locale which define jalali and ad date
+	 */
+	locale: PropTypes.oneOf(['fa', 'en']),
+};
 
 DatePicker.defaultProps = {
 	locale: 'en',

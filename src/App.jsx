@@ -3,7 +3,7 @@ import Check from '@/components/Check';
 import Toggle from '@/components/Toggle/Toggle';
 import Select from './components/Select';
 import File from './components/File';
-import DatePicker from './components/DatePicker';
+import DatePicker from './components/DatePicker/DatePicker';
 
 function App() {
 	const handleSubmit = (e) => {
