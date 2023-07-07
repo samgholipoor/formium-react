@@ -3,9 +3,9 @@ Formium_Address_link:
 
 # formium react
 you can find out the live demo of formium in the following link:
-[https://formium-react.vercel.app/](Formium address link)
+[Formium address link](https://formium-react.vercel.app/)
 and you can aslo find out the formium storybook in the link below:
-[https://formium-storybook.vercel.app/](Formium Storybook address link)
+[Formium Storybook address link](https://formium-storybook.vercel.app/)
 
 ## Available Scripts
 
