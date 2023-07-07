@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { mergeClassNames } from '@/utils/classname';
 import useFormiumField from '@/hooks/useFormiumField';
 import { ErrorMessage, Label } from '@/components/Formium';
@@ -105,6 +106,25 @@ export default function File({
 		</div>
 	);
 }
+
+File.propTypes = {
+	/**
+	 * Identifier of file input
+	 */
+	name: PropTypes.string,
+	/**
+	 * File label
+	 */
+	label: PropTypes.string,
+	/**
+	 * File placeholder
+	 */
+	placeholder: PropTypes.string,
+	/**
+	 * define the file input state of acepting multiple or single file
+	 */
+	multiple: PropTypes.bool,
+};
 
 File.defaultProps = {
 	label: '',
