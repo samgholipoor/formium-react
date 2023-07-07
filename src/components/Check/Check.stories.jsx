@@ -15,6 +15,7 @@ export default {
 	args: {
 		name: 'car',
 		label: 'Cars',
+		multiple: false,
 		options: [
 			{ label: 'BMW', value: 1 },
 			{ label: 'Benz', value: 2 },
