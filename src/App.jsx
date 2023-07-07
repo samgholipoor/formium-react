@@ -28,7 +28,7 @@ function App() {
 					onSuccess={handleSuccess}
 					onReject={handleError}
 				>
-					<DatePicker name="date" />
+					<DatePicker name="date" isRange />
 					<Check
 						label="mrital status"
 						name="name"

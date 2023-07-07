@@ -3,7 +3,13 @@ module.exports = {
 		browser: true,
 		es2021: true,
 	},
-	extends: ['airbnb-base', 'eslint:recommended', 'plugin:react/recommended', 'prettier'],
+	extends: [
+		'airbnb-base',
+		'eslint:recommended',
+		'plugin:react/recommended',
+		'prettier',
+		'plugin:storybook/recommended',
+	],
 	plugins: ['react', 'import'],
 	overrides: [],
 	parserOptions: {
@@ -20,14 +26,25 @@ module.exports = {
 		'default-param-last': 'off',
 		'no-shadow': 'off',
 		'no-useless-return': 'off',
-		indent: ['error', 'tab', { SwitchCase: 1 }],
+		indent: [
+			'error',
+			'tab',
+			{
+				SwitchCase: 1,
+			},
+		],
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
 		// import
 		'import/extensions': 'off',
 		'import/no-unresolved': 'off',
-		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+		'import/no-extraneous-dependencies': [
+			'error',
+			{
+				devDependencies: true,
+			},
+		],
 		'import/order': [
 			'error',
 			{
