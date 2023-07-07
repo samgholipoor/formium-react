@@ -2,7 +2,7 @@
 import daisyui from 'daisyui';
 
 export default {
-	content: ['./src/**/*.{vue,js,ts,jsx,tsx,html}', './index.html'],
+	content: ['./src/**/*.{vue,js,ts,jsx,tsx,html,stories}', './index.html'],
 	theme: {
 		extend: {},
 	},

@@ -3,7 +3,7 @@ import useFormiumField from '@/hooks/useFormiumField';
 import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
 
-const Check = ({ className, label, options, multiple, children, ...fieldProps }) => {
+const Check = ({ className, label, options, multiple, ...fieldProps }) => {
 	const { id, value, onChange, error, ...props } = useFormiumField(
 		fieldProps,
 		multiple ? [] : undefined,
