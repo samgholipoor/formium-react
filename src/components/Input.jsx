@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useFormiumField } from '@/hooks/useFormiumField';
 import { ErrorMessage, Label } from '@/components/Formium';
-import { mergeClassNames } from '@/utils';
+import { mergeClassNames } from '@/utils/classname';
 
 const Input = ({ label, placeholder, multiline, type, className, ...fieldProps }) => {
 	const { id, value, onChange, error, ...props } = useFormiumField(fieldProps, '');

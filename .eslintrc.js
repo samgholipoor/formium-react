@@ -15,6 +15,7 @@ module.exports = {
 		'react/prop-types': 'off',
 		'react/react-in-jsx-scope': 'off',
 		// js
+		'import/prefer-default-export': 'off',
 		'no-continue': 'off',
 		'default-param-last': 'off',
 		'no-shadow': 'off',

@@ -1,6 +1,6 @@
 import useFormiumField from '@/hooks/useFormiumField';
+import { ErrorMessage, Label } from '@/components/Formium';
 import { mergeClassNames } from '@/utils/classname';
-import { ErrorMessage, Label } from './Formium';
 
 const Toggle = ({ label, className, ...fieldProps }) => {
 	const { id, value, onChange, error, ...props } = useFormiumField(fieldProps, false);

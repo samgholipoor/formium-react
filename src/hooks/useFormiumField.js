@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { useFormium } from '@/providers/FormiumContext';
-import { generateUUID } from '@/utils';
+import { generateUUID } from '@/utils/uuid';
 
 const emptyFn = () => {};
 const trueFn = () => true;

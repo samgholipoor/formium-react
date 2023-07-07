@@ -3,6 +3,7 @@ import Check from '@/components/Check';
 import Toggle from '@/components/Toggle';
 import Select from './components/Select';
 import File from './components/File';
+import DatePicker from './components/DatePicker';
 
 function App() {
 	const handleSubmit = (e) => {
@@ -27,6 +28,7 @@ function App() {
 					onSuccess={handleSuccess}
 					onReject={handleError}
 				>
+					<DatePicker name="date" />
 					<Check
 						label="mrital status"
 						name="name"

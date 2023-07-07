@@ -1,6 +1,6 @@
 import { useReducer, useCallback, useMemo, useEffect } from 'react';
 import { FormiumProvider } from '@/providers/FormiumContext';
-import { mergeClassNames } from '@/utils';
+import { mergeClassNames } from '@/utils/classname';
 
 const initialValues = {
 	values: {},

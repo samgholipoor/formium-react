@@ -1,6 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
-import { typeOf } from '@/utils';
+import { typeOf } from '@/utils/typeOf';
 
 export const mergeClassNames = (...args) =>
 	args

@@ -1,5 +1,5 @@
-/* eslint-disable import/prefer-default-export */
 // https://stackoverflow.com/a/8809472
+
 export const generateUUID = () => {
 	// Public Domain/MIT
 	let d = new Date().getTime(); // Timestamp
