@@ -1,4 +1,5 @@
 import { useReducer, useCallback, useMemo, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { FormiumProvider } from '@/providers/FormiumContext';
 import { mergeClassNames } from '@/utils/classname';
 
@@ -169,6 +170,37 @@ function Formium({
 		</FormiumProvider>
 	);
 }
+
+Formium.propTypes = {
+	/**
+	 * Formium values which get object of form values
+	 */
+	values: PropTypes.object,
+	/**
+	 * Formium formatters which get object with keys of corresponding form value indentifier and with value of function with formats the value
+	 */
+	formatters: PropTypes.object,
+	/**
+	 * Formium validators which get object with keys of corresponding form value indentifier and with value of function with validates the value
+	 */
+	validators: PropTypes.object,
+	/**
+	 * Formium action gets a function which returns the promise (is this case could be an api call)
+	 */
+	action: PropTypes.func,
+	/**
+	 * Formium onSuccess gets a function which will invoke if the action function returns a resolved promise
+	 */
+	onSuccess: PropTypes.func,
+	/**
+	 * Formium onReject gets a function which will invoke if the action function returns a failure promise
+	 */
+	onReject: PropTypes.func,
+	/**
+	 * Children gets a list of Formium components like: Input, Select, Check, DatePicker, ... . to see the all components you can jump into the atoms folder in storybook
+	 */
+	children: PropTypes.arrayOf(PropTypes.node),
+};
 
 Formium.defaultProps = {
 	values: {},
