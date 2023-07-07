@@ -11,6 +11,10 @@ const Check = ({ className, label, options, multiple, ...fieldProps }) => {
 	);
 
 	const type = useMemo(() => (multiple ? 'checkbox' : 'radio'), [multiple]);
+	const colorClass = useMemo(
+		() => (multiple ? 'checkbox checkbox-primary' : 'radio radio-primary'),
+		[multiple],
+	);
 
 	const optionsObject = useMemo(
 		() =>
@@ -59,7 +63,7 @@ const Check = ({ className, label, options, multiple, ...fieldProps }) => {
 							type={type}
 							checked={option.isChecked}
 							onChange={() => handleChange(option.value)}
-							className={type}
+							className={mergeClassNames(colorClass, 'outline-none border-base-300')}
 						/>
 						<span className="label-text text-base"> {option.label} </span>
 					</label>

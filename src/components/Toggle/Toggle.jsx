@@ -14,7 +14,7 @@ const Toggle = ({ label, className, ...fieldProps }) => {
 					id={id}
 					type="checkbox"
 					checked={value}
-					className="toggle"
+					className="toggle toggle-primary"
 					onChange={(e) => onChange(!!e.target.checked)}
 				/>
 				<ErrorMessage error={error} />

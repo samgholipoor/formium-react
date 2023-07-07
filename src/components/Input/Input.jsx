@@ -37,7 +37,7 @@ const Input = ({ label, placeholder, multiline, type, className, ...fieldProps }
 				onChange={handleChange}
 				placeholder={placeholder || label}
 				className={mergeClassNames(
-					'block bg-base-200 dark:bg-base-300 bg-opacity-20 focus:bg-opacity-100 focus:bg-base-100 w-full px-3 border border-base-200 rounded text-base focus:border-primary duration-150 transition-colors',
+					'block bg-base-100 w-full px-3 border border-base-300 rounded text-base focus:border-primary duration-150 transition-colors',
 					multiline && 'py-2 h-40 min-h-16 max-h-96',
 					!multiline && 'h-10',
 				)}
